@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TestApplication</string>
+    <string name="sign_in_width_google">Sign in with Google</string>
+    <string name="sign_in_width_github">Sign in with GitHub</string>
+    <string name="sign_in">Sign in</string>
+    <string name="search">Search…</string>
+    <string name="found_repositories">Found repositories</string>
+    <string name="saved_repositories">Saved repositories</string>
+    <string name="star">Star</string>
+    <string name="fork">Fork</string>
+    <string name="date">Repository created on: </string>
+</resources>
