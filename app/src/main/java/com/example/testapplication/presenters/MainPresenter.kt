@@ -1,6 +1,7 @@
 package com.example.testapplication.presenters
 
 import android.content.Context
+import com.example.testapplication.SQLite.SQLiteHelper
 import com.example.testapplication.Screens.SignIn
 import com.example.testapplication.api.RetrofitClient
 import com.example.testapplication.intefaces.MainView
@@ -49,5 +50,10 @@ class MainPresenter @Inject constructor(private val router: Router) : MvpPresent
 
     fun showResult(list: ArrayList<Repository>){
         viewState.showResult(list)
+    }
+
+    fun deleteAll(id: String, context: Context){
+        val helper = SQLiteHelper(context)
+        helper.deleteAllUsersSavedRepository(id)
     }
 }

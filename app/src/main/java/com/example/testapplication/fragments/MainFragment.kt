@@ -51,9 +51,14 @@ class MainFragment(private val id: String, private var tabIndex: Int) : MvpAppCo
 
         if (id != "") {
             binding.tabLayout.visibility = View.VISIBLE
+            if (tabIndex == 1)binding.deleteAllSaved.visibility = View.VISIBLE
+            else binding.deleteAllSaved.visibility = View.GONE
         } else {
             binding.tabLayout.visibility = View.GONE
+            binding.deleteAllSaved.visibility = View.GONE
         }
+
+        binding.deleteAllSaved.setOnClickListener { deleteAllSaved() }
 
         binding.listOfRepositories.layoutManager = LinearLayoutManager(context)
 
@@ -66,6 +71,7 @@ class MainFragment(private val id: String, private var tabIndex: Int) : MvpAppCo
                 when (tab) {
                     binding.tabLayout.getTabAt(0) -> {
                         tabIndex = 0
+                        binding.deleteAllSaved.visibility = View.GONE
                         mainPresenter.showResult(listRepo)
                         binding.searchBtn.setOnClickListener {
                             search(binding.searchText.text.toString())
@@ -73,6 +79,7 @@ class MainFragment(private val id: String, private var tabIndex: Int) : MvpAppCo
                     }
                     binding.tabLayout.getTabAt(1) -> {
                         tabIndex = 1
+                        binding.deleteAllSaved.visibility = View.VISIBLE
                         val list = helper.getUsersSavedRepositories(id)
                         mainPresenter.showResult(list)
                         binding.searchBtn.setOnClickListener {
@@ -126,6 +133,9 @@ class MainFragment(private val id: String, private var tabIndex: Int) : MvpAppCo
     }
 
     override fun deleteAllSaved() {
+        val list : ArrayList<Repository> = ArrayList()
+        showResult(list)
+        mainPresenter.deleteAll(id, requireContext())
     }
 
     override fun showError(t: Throwable) {
